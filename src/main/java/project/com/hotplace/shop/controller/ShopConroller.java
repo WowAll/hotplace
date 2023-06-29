@@ -110,4 +110,29 @@ public class ShopConroller {
 		return "shop/selectAll";
 	}
 	
+	@RequestMapping(value = "/searchList.do", method = RequestMethod.GET)
+	public String b_searchList(Model model,
+			String searchKey, String searchWord) {
+		log.info("/searchList.do");
+		log.info("searchKey:{}",searchKey);
+		log.info("searchWord:{}",searchWord);
+		
+		List<ShopVO> vos = service.searchList(searchKey,searchWord);
+		
+		model.addAttribute("vos", vos);
+		
+		return "Shop/selectAll";
+	}
+	
+	@RequestMapping(value = "/selectOne.do", method = RequestMethod.GET)
+	public String b_selectOne(ShopVO vo, Model model) {
+		log.info("/b_selectOne.do...{}", vo);
+		
+		ShopVO vo2 = service.selectOne(vo);
+		model.addAttribute("vo2", vo2);
+		
+
+		return "Shop/selectOne";
+	}
+	
 }
