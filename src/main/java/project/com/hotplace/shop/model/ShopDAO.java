@@ -14,8 +14,4 @@ public interface ShopDAO {
 	public ShopVO selectOne(ShopVO vo);
 
 	public List<ShopVO> searchList(String searchKey, String searchWord, int pageNum);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main
