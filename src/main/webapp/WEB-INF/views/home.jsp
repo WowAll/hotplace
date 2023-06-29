@@ -10,11 +10,6 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<<<<<<< HEAD
 
-=======
-<P> new Test </P>
-<p> asda </p>
->>>>>>> main
 </body>
 </html>
