@@ -1,6 +1,8 @@
 package project.com.hotplace.shop.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,16 +52,27 @@ public class ShopDAOimpl implements ShopDAO {
 	}
 
 	@Override
-	public List<ShopVO> searchList(String searchKey, String searchWord) {
+	public List<ShopVO> searchList(String searchKey, String searchWord, int pageNum) {
 		log.info("searchList()....searchKey:{}",searchKey);
 		log.info("searchList()....searchWord:{}",searchWord);
-		String key = "";
-		if(searchKey.equals("name")) {
-			key = "SEARCH_LIST_NAME";
+		log.info("searchList()....pageNum:{}", pageNum);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		int itemsPerPage = 10;
+		int end = itemsPerPage * pageNum;
+		int start = (pageNum - 1) * itemsPerPage + 1;
+		
+		param.put("end", end);
+		param.put("start", start);
+		
+		if(!searchWord.isEmpty()) {
+			param.put("searchKey", searchKey);
+			param.put("searchWord", "%" + searchWord + "%");
+			return sqlSession.selectList("SEARCH_LIST", param);
 		}else {
-			key = "SEARCH_LIST_CATE";
+			return sqlSession.selectList("SELECT_ALL", param);
 		}
-		return sqlSession.selectList(key,"%"+searchWord+"%");
 	}
 
 }

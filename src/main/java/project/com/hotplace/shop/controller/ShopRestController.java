@@ -14,21 +14,21 @@ import project.com.hotplace.shop.service.ShopService;
 
 @Slf4j
 @Controller
-@RequestMapping("/shop")
+@RequestMapping("/json/shop")
 public class ShopRestController {
 
 	@Autowired
 	ShopService service;
 	
 	@ResponseBody
-	@RequestMapping(value = "/json_selectAll.do", method = RequestMethod.GET)
-	public String json_selectAll() {
+	@RequestMapping(value = "/selectAll.do", method = RequestMethod.GET)
+	public List<ShopVO> json_selectAll(String searchKey, String searchWord, int pageNum) {
 		log.info("/json_selectAll.do");
+		log.info("searchKey:{}", searchKey);
+		log.info("searchKey:{}", searchWord);
 		
-		List<ShopVO> vos = service.selectAll();
+		List<ShopVO> vos = service.searchList(searchKey, searchWord, pageNum);
 		
-		log.info("/json_result...{}", vos);
-		
-		return null;
+		return vos;
 	}
 }

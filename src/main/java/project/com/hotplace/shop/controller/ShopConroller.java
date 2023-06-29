@@ -1,5 +1,6 @@
 package project.com.hotplace.shop.controller;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -16,7 +17,7 @@ import project.com.hotplace.shop.service.ShopService;
 
 @Slf4j
 @Controller
-@RequestMapping("shop")
+@RequestMapping("/shop")
 public class ShopConroller {
 
 	@Autowired
@@ -26,16 +27,18 @@ public class ShopConroller {
 	ServletContext sContext;
 	
 	@RequestMapping(value = "/selectAll.do", method = RequestMethod.GET)
-	public String selectAll(Model model) {
-		log.info("/selectAll.do");
-
-		List<ShopVO> vos = service.selectAll();
-
-		model.addAttribute("vos", vos);
+	public String selectAll(Model model, String searchKey, String searchWord, int pageNum) {
+		log.info("/searchList.do");
+		log.info("searchKey:{}",searchKey);
+		log.info("searchWord:{}",searchWord);
 		
-		log.info("data...{}", vos);
-
-		return null;
+		List<ShopVO> vos = service.searchList(searchKey,searchWord, pageNum);
+		long cnt = vos.stream().count();
+		
+		model.addAttribute("vos", vos);
+		model.addAttribute("cnt", cnt);
+		
+		return "shop/selectAll";
 	}
 	
 	@RequestMapping(value = "/insert.do", method = RequestMethod.GET)
@@ -97,36 +100,9 @@ public class ShopConroller {
 		
 	}
 	
-	@RequestMapping(value = "/searchList.do", method = RequestMethod.GET)
-	public String searchList(Model model, String searchKey, String searchWord) {
-		log.info("/searchList.do");
-		log.info("searchKey:{}",searchKey);
-		log.info("searchWord:{}",searchWord);
-		
-		List<ShopVO> vos = service.searchList(searchKey,searchWord);
-		
-		model.addAttribute("vos", vos);
-		
-		return "shop/selectAll";
-	}
-	
-	@RequestMapping(value = "/searchList.do", method = RequestMethod.GET)
-	public String b_searchList(Model model,
-			String searchKey, String searchWord) {
-		log.info("/searchList.do");
-		log.info("searchKey:{}",searchKey);
-		log.info("searchWord:{}",searchWord);
-		
-		List<ShopVO> vos = service.searchList(searchKey,searchWord);
-		
-		model.addAttribute("vos", vos);
-		
-		return "Shop/selectAll";
-	}
-	
 	@RequestMapping(value = "/selectOne.do", method = RequestMethod.GET)
-	public String b_selectOne(ShopVO vo, Model model) {
-		log.info("/b_selectOne.do...{}", vo);
+	public String selectOne(ShopVO vo, Model model) {
+		log.info("/selectOne.do...{}", vo);
 		
 		ShopVO vo2 = service.selectOne(vo);
 		model.addAttribute("vo2", vo2);

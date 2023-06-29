@@ -5,20 +5,32 @@
 
 <mapper namespace="project.com.hotplace.shop">
 	<select id="SELECT_ALL" resultType="project.com.hotplace.shop.model.ShopVO">
-		select * from shop order by num desc
+		select * from shop where num between #{start} and #{end} order by num desc
 	</select>
 	  
 	<select id="SELECT_ONE" resultType="project.com.hotplace.shop.model.ShopVO">
-		select * from shop where num = #{num}
+		select * from shop where
+		<if test="searchKey == 'NAME'">
+			name
+		</if>
+		<if test="searchKey == 'cate'">
+			cate
+		</if>
+		like #{searchWord}
+		where num between #{start} and #{end}
 	</select>
 	
 	
-	<select id="SEARCH_LIST_NAME" resultType="project.com.hotplace.shop.model.ShopVO">
-		select * from shop where name like #{searchWord}
-	</select>
-	
-	<select id="SEARCH_LIST_CATE" resultType="project.com.hotplace.shop.model.ShopVO">
-		select * from shop where cate like #{searchWord} 
+	<select id="SEARCH_LIST" resultType="project.com.hotplace.shop.model.ShopVO">
+		select * from shop where
+		<if test="searchKey == 'NAME'">
+			name
+		</if>
+		<if test="searchKey == 'cate'">
+			cate
+		</if>
+		like #{searchWord}
+		where num between #{start} and #{end}
 	</select>
 	
 	<insert id="INSERT" parameterType="project.com.hotplace.shop.model.ShopVO">
@@ -34,7 +46,7 @@
 		where num = #{num}
 	</update>
 	
-	<delete id="S_DELETE">
+	<delete id="DELETE">
 		delete from shop where num = #{num}
 	</delete>
 

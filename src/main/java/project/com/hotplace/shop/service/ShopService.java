@@ -40,7 +40,7 @@ public class ShopService {
 		return dao.selectOne(vo);
 	}
 	
-	public List<ShopVO> searchList(String searchKey, String searchWord) {
-		return dao.searchList(searchKey, searchWord);
+	public List<ShopVO> searchList(String searchKey, String searchWord, int pageNum) {
+		return dao.searchList(searchKey, searchWord, pageNum);
 	}
 }
