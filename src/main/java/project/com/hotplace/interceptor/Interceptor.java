@@ -36,11 +36,11 @@ public class Interceptor extends HandlerInterceptorAdapter {
 		return true;
 	}
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		log.info("postHandle()...");
-
-	}
-
+//	@Override
+//	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+//			ModelAndView modelAndView) throws Exception {
+//		log.info("postHandle()...");
+//
+//	}
+//
 }
