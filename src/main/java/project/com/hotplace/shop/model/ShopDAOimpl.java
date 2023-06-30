@@ -71,7 +71,7 @@ public class ShopDAOimpl implements ShopDAO {
 			param.put("searchWord", "%" + searchWord + "%");
 			return sqlSession.selectList("SHO_SEARCH_LIST", param);
 		}else {
-			return sqlSession.selectList("SHO_SELECT_ALL", param);
+			return sqlSession.selectList("SELECT_ALL", param);
 		}
 	}
 
