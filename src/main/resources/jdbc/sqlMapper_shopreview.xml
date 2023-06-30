@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.com.hotplace.shop">
+	<select id="SRE_SELECT_ALL" resultType="project.com.hotplace.shop.model.ShopVO">
+		select * from shopreview where shopnum=#{shopnum} order by num desc
+	</select>
+	
+	<select id="SRE_SELECT_ONE" resultType="project.com.hotplace.shop.model.ShopVO">
+		select * from shopreview where num = #{num}
+	</select>
+	
+	
+	<insert id="SRE_INSERT" parameterType="project.com.hotplace.shop.model.ShopVO">
+		insert into shop(num,writer,content,shopnum,rated) 
+		values(sho_sequence.nextval,#{writer},#{content},#{shopnum},#{rated})
+	</insert>
+	
+	
+	
+	<update id="SRE_UPDATE" parameterType="project.com.hotplace.shop.model.ShopVO">
+		update shop set content=#{content} , rated=#{rated}
+		where num = #{num}
+	</update>
+	
+	<delete id="SRE_DELETE">
+		delete from shopreview where num = #{num}
+	</delete>
+	
+</mapper>
