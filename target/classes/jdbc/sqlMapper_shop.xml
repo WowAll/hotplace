@@ -4,37 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.com.hotplace.shop">
-	<select id="SELECT_ALL" resultType="project.com.hotplace.shop.model.ShopVO">
+	<select id="SHO_SELECT_ALL" resultType="project.com.hotplace.shop.model.ShopVO">
 		select * from shop order by num desc
 	</select>
 	
-	<select id="SELECT_ONE" resultType="project.com.hotplace.shop.model.ShopVO">
+	<select id="SHO_SELECT_ONE" resultType="project.com.hotplace.shop.model.ShopVO">
 		select * from shop where num = #{num}
 	</select>
 	
 	
-	<select id="SEARCH_LIST_NAME" resultType="project.com.hotplace.shop.model.ShopVO">
+	<select id="SHO_SEARCH_LIST_NAME" resultType="project.com.hotplace.shop.model.ShopVO">
 		select * from shop where name like #{searchWord}
 	</select>
 	
-	<select id="SEARCH_LIST_CATE" resultType="project.com.hotplace.shop.model.ShopVO">
+	<select id="SHO_SEARCH_LIST_CATE" resultType="project.com.hotplace.shop.model.ShopVO">
 		select * from shop where cate like #{searchWord} 
 	</select>
 	
-	<insert id="INSERT" parameterType="project.com.hotplace.shop.model.ShopVO">
+	<insert id="SHO_INSERT" parameterType="project.com.hotplace.shop.model.ShopVO">
 		insert into shop(num,name,cate,tel) 
 		values(sho_sequence.nextval,#{name},#{cate},#{tel})
 	</insert>
 	
 	
 	
-	<update id="UPDATE" parameterType="project.com.hotplace.shop.model.ShopVO">
+	<update id="SHO_UPDATE" parameterType="project.com.hotplace.shop.model.ShopVO">
 		update shop set name=#{name} , cate=#{cate} , 
 		tel=#{tel}, loc_x=#{loc_x}, loc_y=#{loc_y}
 		where num = #{num}
 	</update>
 	
-	<delete id="S_DELETE">
+	<delete id="SHO_S_DELETE">
 		delete from shop where num = #{num}
 	</delete>
 	

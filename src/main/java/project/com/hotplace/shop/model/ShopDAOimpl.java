@@ -24,31 +24,31 @@ public class ShopDAOimpl implements ShopDAO {
 	@Override
 	public int insert(ShopVO vo) {
 		log.info("insert()....{}", vo);
-		return sqlSession.insert("INSERT",vo);
+		return sqlSession.insert("SHO_INSERT",vo);
 	}
 
 	@Override
 	public int update(ShopVO vo) {
 		log.info("update()....{}", vo);
-		return sqlSession.update("UPDATE",vo);
+		return sqlSession.update("SHO_UPDATE",vo);
 	}
 
 	@Override
 	public int delete(ShopVO vo) {
 		log.info("delete()....{}", vo);
-		return sqlSession.delete("DELETE",vo);
+		return sqlSession.delete("SHO_DELETE",vo);
 	}
 
 	@Override
 	public List<ShopVO> selectAll() {
 		log.info("selectAll()....{}");
-		return sqlSession.selectList("SELECT_ALL");
+		return sqlSession.selectList("SHO_SELECT_ALL");
 	}
 
 	@Override
 	public ShopVO selectOne(ShopVO vo) {
 		log.info("selectOne()....{}", vo);
-		return sqlSession.selectOne("SELECT_ONE",vo);
+		return sqlSession.selectOne("SHO_SELECT_ONE",vo);
 	}
 
 	@Override
@@ -69,9 +69,9 @@ public class ShopDAOimpl implements ShopDAO {
 		if(!searchWord.isEmpty()) {
 			param.put("searchKey", searchKey);
 			param.put("searchWord", "%" + searchWord + "%");
-			return sqlSession.selectList("SEARCH_LIST", param);
+			return sqlSession.selectList("SHO_SEARCH_LIST", param);
 		}else {
-			return sqlSession.selectList("SELECT_ALL", param);
+			return sqlSession.selectList("SHO_SELECT_ALL", param);
 		}
 	}
 
